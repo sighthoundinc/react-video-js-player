@@ -27,6 +27,7 @@ interface IProps {
     height?: number | string;
     hideControls?: string[];
     hidePlaybackRates?: boolean;
+    options?: PlayerOptions; // Object containing VideoJS options per their docs
     playbackRates?: number[];
     poster?: string;
     preload?: "auto" | "none" | "metadata";
@@ -43,9 +44,12 @@ interface IProps {
     onEnd?: () => any;
 }
 
-// TODO Figure out why these aren't defined in @types/videojs
+// These are extra options that don't seem to be in the @types file. Update as needed.
 type PlayerOptions = videojs.PlayerOptions & {
-    bigPlayButton: boolean | undefined;
+    bigPlayButton?: boolean | undefined;
+    userActions?: {
+        doubleClick?: boolean | (() => any);
+    };
 };
 
 class VideoPlayer extends React.Component<IProps, {}> {
@@ -65,6 +69,7 @@ class VideoPlayer extends React.Component<IProps, {}> {
         onSeeked: () => {},
         onSeeking: () => {},
         onTimeUpdate: () => {},
+        options: {},
         playbackRates: [0.5, 1, 1.5, 2],
         poster: "",
         preload: "auto",
@@ -129,7 +134,8 @@ class VideoPlayer extends React.Component<IProps, {}> {
         if (!hidePlaybackRates) {
             playerOptions.playbackRates = props.playbackRates;
         }
-        return playerOptions;
+
+        return {...props.options, ...playerOptions};
     }
 
     private set_controls_visibility(player: videojs.Player, hiddenControls: IProps["hideControls"]) {
