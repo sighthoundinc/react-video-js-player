@@ -1,17 +1,22 @@
 # react-video-js-player
-React wrapper for VideoJS. [Live Demo](https://karan101292.github.io/react-video-js-player/)
 
-## Install
-```
-npm install --save react-video-js-player
-```
+This is NOT an npm module any longer!
+
+Originally forked from [https://github.com/karan101292/react-video-js-player](https://github.com/karan101292/react-video-js-player).
+
+Converted (roughly) to TypeScript, to be included directly into projects. Contains additional features, fixes, etc.
+
+This is a soft-package and is meant to be included directly into project. There is no package.json, so you will need to make sure your main project includes the following packages:
+
+* video-js@^7.6
+* react
 
 ## Usage
 ```javascript
-import React, { Component } from 'react';
-import VideoPlayer from 'react-video-js-player';
+import React from 'react';
+import VideoPlayer from 'pkg/react-video-js-player';
 
-class VideoApp extends Component {
+class VideoApp extends React.Component {
     player = {}
     state = {
         video: {
