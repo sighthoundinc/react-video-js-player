@@ -148,7 +148,7 @@ class VideoPlayer extends React.Component<IProps, {}> {
 
         this.player.ready(() => {
             if (typeof props.onReady === "function") {
-                props.onReady(this.player)
+                props.onReady(this.player);
             }
 
             // TODO Figure out why this player needs to be attached to window
