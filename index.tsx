@@ -90,7 +90,6 @@ class VideoPlayer extends React.Component<IProps, {}> {
         if (this.props.src !== nextProps.src) {
             this.init_player(nextProps);
         } else if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
-            console.log("SIZE CHANGED");
             if (this.player && nextProps.width && nextProps.height) {
                 this.player.width(nextProps.width as number);
                 this.player.height(nextProps.height as number);
