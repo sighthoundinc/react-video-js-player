@@ -89,6 +89,12 @@ class VideoPlayer extends React.Component<IProps, {}> {
         this.set_controls_visibility(this.player!, nextProps.hideControls);
         if (this.props.src !== nextProps.src) {
             this.init_player(nextProps);
+        } else if (this.props.width !== nextProps.width) {
+            console.log("SIZE CHANGED");
+            if (this.player && nextProps.width && nextProps.height) {
+                this.player.width(nextProps.width as number);
+                this.player.height(nextProps.height as number);
+            }
         }
     }
 
