@@ -49,6 +49,7 @@ type PlayerOptions = videojs.PlayerOptions & {
     bigPlayButton?: boolean | undefined;
     userActions?: {
         doubleClick?: boolean | (() => any);
+        hotkeys?: boolean | ((event: any) => any);
     };
 };
 
