@@ -42,7 +42,7 @@ interface IProps {
     onSeeking?: (currentTime: number) => any;
     onSeeked?: (position: number, currentTime: number) => any;
     onEnd?: () => any;
-    onError?: () => any;
+    onError?: (err: any) => any;
     onLoadedData?: () => any;
 }
 
@@ -208,9 +208,9 @@ class VideoPlayer extends React.Component<IProps, {}> {
                 props.onEnd();
             }
         });
-        this.player.on("error", () => {
+        this.player.on("error", (err: any) => {
             if (typeof props.onError === "function") {
-                props.onError();
+                props.onError(err);
             }
         });
         this.player.on("loadeddata", () => {
