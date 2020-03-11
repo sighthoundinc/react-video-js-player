@@ -1,6 +1,3 @@
-/* tslint:disable:file-header */
-/* tslint:disable:no-empty */
-
 import * as React from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
