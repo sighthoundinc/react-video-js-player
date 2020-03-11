@@ -42,6 +42,8 @@ interface IProps {
     onSeeking?: (currentTime: number) => any;
     onSeeked?: (position: number, currentTime: number) => any;
     onEnd?: () => any;
+    onError?: (err: any) => any;
+    onLoadedData?: () => any;
 }
 
 // These are extra options that don't seem to be in the @types file. Update as needed.
@@ -204,6 +206,16 @@ class VideoPlayer extends React.Component<IProps, {}> {
         this.player.on("ended", () => {
             if (typeof props.onEnd === "function") {
                 props.onEnd();
+            }
+        });
+        this.player.on("error", (err: any) => {
+            if (typeof props.onError === "function") {
+                props.onError(err);
+            }
+        });
+        this.player.on("loadeddata", () => {
+            if (typeof props.onLoadedData === "function") {
+                props.onLoadedData();
             }
         });
     }
