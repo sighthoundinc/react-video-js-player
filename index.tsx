@@ -65,13 +65,13 @@ class VideoPlayer extends React.Component<IProps, {}> {
         controls: true,
         hideControls: [],
         hidePlaybackRates: false,
-        onEnd: () => {},
-        onPause: () => {},
-        onPlay: () => {},
-        onReady: () => {},
-        onSeeked: () => {},
-        onSeeking: () => {},
-        onTimeUpdate: () => {},
+        onEnd: () => { return; },
+        onPause: () => { return; },
+        onPlay: () => { return; },
+        onReady: () => { return; },
+        onSeeked: () => { return; },
+        onSeeking: () => { return; },
+        onTimeUpdate: () => { return; },
         options: {},
         playbackRates: [0.5, 1, 1.5, 2],
         poster: "",
@@ -89,7 +89,7 @@ class VideoPlayer extends React.Component<IProps, {}> {
     }
 
     public componentWillReceiveProps(nextProps: IProps) {
-        this.set_controls_visibility(this.player!, nextProps.hideControls);
+        this.set_controls_visibility(this.player, nextProps.hideControls);
         if (this.props.src !== nextProps.src) {
             this.init_player(nextProps);
         } else if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
@@ -191,8 +191,8 @@ class VideoPlayer extends React.Component<IProps, {}> {
             }
         });
         this.player.on("seeking", () => {
-            this.player.off("timeupdate", () => { });
-            this.player.one("seeked", () => { });
+            this.player.off("timeupdate", () => { return; });
+            this.player.one("seeked", () => { return; });
             if (typeof props.onSeeking === "function") {
                 props.onSeeking(this.player.currentTime());
             }
