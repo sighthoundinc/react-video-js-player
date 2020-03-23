@@ -62,13 +62,27 @@ class VideoPlayer extends React.Component<IProps, {}> {
         controls: true,
         hideControls: [],
         hidePlaybackRates: false,
-        onEnd: () => { return; },
-        onPause: () => { return; },
-        onPlay: () => { return; },
-        onReady: () => { return; },
-        onSeeked: () => { return; },
-        onSeeking: () => { return; },
-        onTimeUpdate: () => { return; },
+        onEnd: () => {
+            return;
+        },
+        onPause: () => {
+            return;
+        },
+        onPlay: () => {
+            return;
+        },
+        onReady: () => {
+            return;
+        },
+        onSeeked: () => {
+            return;
+        },
+        onSeeking: () => {
+            return;
+        },
+        onTimeUpdate: () => {
+            return;
+        },
         options: {},
         playbackRates: [0.5, 1, 1.5, 2],
         poster: "",
@@ -188,8 +202,12 @@ class VideoPlayer extends React.Component<IProps, {}> {
             }
         });
         this.player.on("seeking", () => {
-            this.player.off("timeupdate", () => { return; });
-            this.player.one("seeked", () => { return; });
+            this.player.off("timeupdate", () => {
+                return;
+            });
+            this.player.one("seeked", () => {
+                return;
+            });
             if (typeof props.onSeeking === "function") {
                 props.onSeeking(this.player.currentTime());
             }
