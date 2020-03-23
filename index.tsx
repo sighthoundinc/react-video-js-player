@@ -52,7 +52,7 @@ type PlayerOptions = videojs.PlayerOptions & {
     };
 };
 
-class VideoPlayer extends React.Component<IProps, {}> {
+class VideoPlayer extends React.Component<IProps> {
     // TODO Make typescript realize there are default props being set.
     public static defaultProps = {
         autoplay: false,
@@ -149,7 +149,7 @@ class VideoPlayer extends React.Component<IProps, {}> {
         playerOptions.width = props.width as number | undefined;
         playerOptions.height = props.height as number | undefined;
         playerOptions.bigPlayButton = props.bigPlayButton;
-        const hidePlaybackRates = props.hidePlaybackRates || props.hideControls!.includes("playbackrates");
+        const hidePlaybackRates = props.hidePlaybackRates ?? props.hideControls!.includes("playbackrates");
         if (!hidePlaybackRates) {
             playerOptions.playbackRates = props.playbackRates;
         }
