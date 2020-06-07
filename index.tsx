@@ -159,10 +159,16 @@ class VideoPlayer extends React.Component<IProps> {
 
     private set_controls_visibility(player: videojs.Player, hiddenControls: IProps["hideControls"]) {
         Object.keys(Controls).map((x: string) => {
-            (player as any).controlBar[Controls[x]].show();
+            const component = player.controlBar.getChild(Controls[x]);
+            if (component) {
+                component.show();
+            }
         });
         hiddenControls!.map((x) => {
-            (player as any).controlBar[Controls[x]].hide();
+            const component = player.controlBar.getChild(Controls[x]);
+            if (component) {
+                component.hide();
+            }
         });
     }
 
