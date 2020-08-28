@@ -62,25 +62,25 @@ class VideoPlayer extends React.Component<IProps> {
         controls: true,
         hideControls: [],
         hidePlaybackRates: false,
-        onEnd: () => {
+        onEnd: (): void => {
             return;
         },
-        onPause: () => {
+        onPause: (): void => {
             return;
         },
-        onPlay: () => {
+        onPlay: (): void => {
             return;
         },
-        onReady: () => {
+        onReady: (): void => {
             return;
         },
-        onSeeked: () => {
+        onSeeked: (): void => {
             return;
         },
-        onSeeking: () => {
+        onSeeking: (): void => {
             return;
         },
-        onTimeUpdate: () => {
+        onTimeUpdate: (): void => {
             return;
         },
         options: {},
@@ -94,30 +94,42 @@ class VideoPlayer extends React.Component<IProps> {
     private player = {} as videojs.Player;
     private playerId = `video-player-${new Date().getTime()}`;
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         this.init_player(this.props);
         this.init_player_events(this.props);
     }
 
-    public componentWillReceiveProps(nextProps: IProps) {
-        this.set_controls_visibility(this.player, nextProps.hideControls);
-        if (this.props.src !== nextProps.src) {
-            this.init_player(nextProps);
-        } else if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
-            if (this.player && nextProps.width && nextProps.height) {
-                this.player.width(nextProps.width as number);
-                this.player.height(nextProps.height as number);
+    public componentDidUpdate(prevProps: IProps): void {
+        this.set_controls_visibility(this.player, this.props.hideControls);
+        if (prevProps.src !== this.props.src) {
+            this.init_player(this.props);
+        } else if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+            if (this.player && this.props.width && this.props.height) {
+                this.player.width(this.props.width as number);
+                this.player.height(this.props.height as number);
             }
         }
     }
+    // DRL - replaced this fn with the one above due to warning in console window.
+    // public componentWillReceiveProps(nextProps: IProps): void {
+    //     this.set_controls_visibility(this.player, nextProps.hideControls);
+    //     if (this.props.src !== nextProps.src) {
+    //         this.init_player(nextProps);
+    //     } else if (this.props.width !== nextProps.width || this.props.height !== nextProps.height) {
+    //         if (this.player && nextProps.width && nextProps.height) {
+    //             this.player.width(nextProps.width as number);
+    //             this.player.height(nextProps.height as number);
+    //         }
+    //     }
+    // }
 
-    public componentWillUnmount() {
+    public componentWillUnmount(): void {
         if (this.player) {
             this.player.dispose();
         }
     }
 
-    public render() {
+    public render(): JSX.Element {
         const playButtonCss = this.props.bigPlayButtonCentered ? "vjs-big-play-centered" : "";
         return (
             <video
