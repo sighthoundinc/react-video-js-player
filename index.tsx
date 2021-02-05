@@ -102,7 +102,7 @@ class VideoPlayer extends React.Component<IProps> {
     public componentDidUpdate(prevProps: IProps): void {
         this.set_controls_visibility(this.player, this.props.hideControls);
         if (prevProps.src !== this.props.src) {
-            this.init_player(this.props);
+            this.init_player(this.props, false);
         } else if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
             if (this.player && this.props.width && this.props.height) {
                 this.player.width(this.props.width as number);
@@ -139,9 +139,11 @@ class VideoPlayer extends React.Component<IProps> {
         );
     }
 
-    private init_player(props: IProps) {
-        const playerOptions = this.generate_player_options(props);
-        this.player = videojs(document.querySelector(`#${this.playerId}`), playerOptions);
+    private init_player(props: IProps, reInitialize = true) {
+        if (reInitialize) {
+            const playerOptions = this.generate_player_options(props);
+            this.player = videojs(document.querySelector(`#${this.playerId}`), playerOptions);
+        }
         this.player.src({
             src: props.src,
             type: props.type || "video/mp4", // Fall back to video/mp4 if nothing is provided
